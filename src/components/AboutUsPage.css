@@ -1,0 +1,35 @@
+.about-page {
+    min-height: 93vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .about-content {
+    background-color: #f6f6f6;
+    flex-grow: 1;
+    text-align: center;
+    padding: 1rem; /* Optional: Add padding if needed */
+    margin-bottom: 0; /* Set margin bottom to 0 to reduce space */
+  }
+  
+  .about-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .about-content p {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .about-mission {
+    margin-top: 2rem;
+  }
+  
+  .about-mission h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+
+  
