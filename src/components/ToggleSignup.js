@@ -116,7 +116,7 @@ const CompanySignupForm = ({ navigate }) => (
       <button className="login-with-google-btn" type="button" onClick={() => handleCompanyGoogleSignup(navigate)}>Signup with Google</button> 
     </div>
     <br/>
-    <a className="forgot-password-link">Already have an account? </a><a href="#" className="forgot-password-link" ><b>Login Here</b></a>
+    <a className="forgot-password-link">Already have an account? </a><a href="/" className="forgot-password-link" ><b>Login Here</b></a>
   </form>
 );
 
@@ -130,7 +130,7 @@ const EmployeeSignupForm = ({ navigate }) => (
       <button className="login-with-google-btn" type="button" onClick={() => handleEmployeeGoogleSignup(navigate)}>Signup with Google</button> 
     </div>
     <br/>
-    <a className="forgot-password-link">Already have an account? </a><a href="#" className="forgot-password-link" ><b>Login Here</b></a>
+    <a className="forgot-password-link">Already have an account? </a><a href="/" className="forgot-password-link" ><b>Login Here</b></a>
   </form>
 );
 

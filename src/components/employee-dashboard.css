@@ -89,9 +89,10 @@
 
 /* Main Content Styles */
 .main-content {
-  flex: 1;
-  padding: 32px;
+  flex: 1 1;
+  padding: 100px 32px 32px;
   overflow-y: auto;
+  height: auto;
 }
 
 .content-wrapper {
@@ -213,11 +214,11 @@ button.calendar-cell {
 }
 
 button.calendar-cell.today {
-  border: 2px solid #4f46e5;
+  border: 2px solid #004b8d;
 }
 
 button.calendar-cell.active {
-  background-color: #4f46e5;
+  background-color: #004b8d;
   color: white;
 }
 
@@ -280,4 +281,67 @@ button.calendar-cell.active {
   .calendar-cell {
     font-size: 12px;
   }
+}
+
+/* News Card */
+.news-card {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.news-item {
+  display: flex;
+  gap: 15px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  align-items: flex-start;
+}
+
+.news-thumbnail {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.news-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.news-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin: 0px;
+}
+
+.news-date {
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 8px;
+}
+.more-news-btn {
+  display: block;
+  margin: 0 auto;
+  padding: 10px 20px;
+  background-color: #004b8d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.more-news-btn:hover {
+  background-color: #0056b3;
 }
