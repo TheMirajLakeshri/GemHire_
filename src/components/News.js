@@ -12,7 +12,7 @@ const NewsPage = () => {
     const fetchNews = async () => {
       try {
         // Fetch paginated news list (page 1, 50 records per page, sorting by creation date)
-        const news = await pb.collection('News').getList(1, 50, {
+        const news = await pb.collection('News').getList(1, 30, {
           sort: '-Date',
         });
         setNewsItems(news.items);

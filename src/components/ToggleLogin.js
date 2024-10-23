@@ -130,7 +130,7 @@ const CompanyLoginForm = ({ navigate, handleForgotPasswordClick }) => (
     <div className="google-login">
       <button className="login-with-google-btn" type="button" onClick={() => handleCompanyGoogleLogin(navigate)}>Login with Google</button> 
     </div>
-    <a className="forgot-password-link">Need to Register? </a><a href="#" className="forgot-password-link" ><b>Create A New Account</b></a><br/>
+    <a className="forgot-password-link">Need to Register? </a><a href="/signup" className="forgot-password-link" ><b>Create A New Account</b></a><br/>
     <a className="forgot-password-link">Forgot Your Password? </a><a href="#" className="forgot-password-link" onClick={handleForgotPasswordClick}><b>Reset Password</b></a>
   </form>
 );
@@ -144,12 +144,11 @@ const EmployeeLoginForm = ({ navigate, handleForgotPasswordClick }) => (
     <div className="google-login">
       <button className="login-with-google-btn" type="button" onClick={() => handleEmployeeGoogleLogin(navigate)}>Login with Google</button> 
     </div>
-    <a className="forgot-password-link">Need to Register? </a><a href="#" className="forgot-password-link" ><b>Create A New Account</b></a><br/>
+    <a className="forgot-password-link">Need to Register? </a><a href="/signup" className="forgot-password-link" ><b>Create A New Account</b></a><br/>
     <a className="forgot-password-link">Forgot Your Password? </a><a href="#" className="forgot-password-link" onClick={handleForgotPasswordClick}><b>Reset Password</b></a>
   </form>
 );
 
-// Forgot Password Modal Component
 const ForgotPasswordModal = ({ closeModal, userType }) => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
@@ -165,7 +164,7 @@ const ForgotPasswordModal = ({ closeModal, userType }) => {
     try {
       await pb.collection(userType).requestPasswordReset(email);
       toast.success("Password reset link sent. Please check your email.");
-      closeModal(); // Close modal after successful submission
+      closeModal(); 
     } catch (error) {
       console.error("Password reset failed:", error);
       setError("Failed to send reset link. Please try again.");

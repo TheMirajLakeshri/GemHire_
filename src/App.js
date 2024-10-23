@@ -25,7 +25,7 @@ function AppContent() {
       {showNavbar && <Navbar />}  {/* Conditionally render the Navbar */}
       <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -33,6 +33,7 @@ function AppContent() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
+        limit={3}
       />
 
       <Routes>

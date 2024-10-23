@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
-import { 
-  User, 
-  Search, 
-  Briefcase, 
+import React, { useState, useEffect } from 'react';
+import pb from "../lib/pocketbase";
+import useLogout from '../hooks/useLogout';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import NewsCard from './NewsCard';
+import { toast } from 'react-toastify';
+import {
+  User,
+  Search,
+  Briefcase,
   Settings,
   ChevronLeft,
   ChevronRight,
@@ -13,7 +18,7 @@ import {
 import './employee-dashboard.css';
 const Calendar = ({ selectedDate, onChange }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
-  
+
   const daysInMonth = (date) => {
     return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
   };
@@ -28,15 +33,15 @@ const Calendar = ({ selectedDate, onChange }) => {
 
   const isToday = (day) => {
     const today = new Date();
-    return day === today.getDate() && 
-           currentDate.getMonth() === today.getMonth() && 
-           currentDate.getFullYear() === today.getFullYear();
+    return day === today.getDate() &&
+      currentDate.getMonth() === today.getMonth() &&
+      currentDate.getFullYear() === today.getFullYear();
   };
 
   const isSelected = (day) => {
-    return day === selectedDate?.getDate() && 
-           currentDate.getMonth() === selectedDate?.getMonth() && 
-           currentDate.getFullYear() === selectedDate?.getFullYear();
+    return day === selectedDate?.getDate() &&
+      currentDate.getMonth() === selectedDate?.getMonth() &&
+      currentDate.getFullYear() === selectedDate?.getFullYear();
   };
 
   const handlePrevMonth = () => {
@@ -55,7 +60,7 @@ const Calendar = ({ selectedDate, onChange }) => {
   const weekDays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
   const totalDays = daysInMonth(currentDate);
   const firstDay = startDayOfMonth(currentDate);
-  
+
   const days = Array.from({ length: 42 }, (_, i) => {
     const day = i - firstDay + 1;
     return day > 0 && day <= totalDays ? day : null;
@@ -81,15 +86,13 @@ const Calendar = ({ selectedDate, onChange }) => {
             {day}
           </div>
         ))}
-        
+
         {days.map((day, index) => (
           <button
             key={index}
-            className={`calendar-cell ${
-              day ? 'hover:bg-gray-100' : 'invisible'
-            } ${isToday(day) ? 'today' : ''} ${
-              isSelected(day) ? 'active' : ''
-            }`}
+            className={`calendar-cell ${day ? 'hover:bg-gray-100' : 'invisible'
+              } ${isToday(day) ? 'today' : ''} ${isSelected(day) ? 'active' : ''
+              }`}
             onClick={() => day && handleDateClick(day)}
             disabled={!day}
           >
@@ -105,32 +108,61 @@ const ProfileSection = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeNav, setActiveNav] = useState('profile');
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [userData, setUserData] = useState(null);
+  const navigate = useNavigate();
+  const logout = useLogout();
+
+  useEffect(() => {
+    if (pb.authStore.isValid) {
+      const loggedInUser = pb.authStore.model; // This contains user data
+      setUserData(loggedInUser);
+    } else {
+      console.log("User is not logged in.");
+      toast.error("User is not logged in");
+      navigate("/");
+    }
+  }, []);
 
   const navItems = [
     { id: 'profile', icon: <User size={20} />, label: 'Profile' },
     { id: 'findJob', icon: <Search size={20} />, label: 'Find Job' },
     { id: 'previousWork', icon: <Briefcase size={20} />, label: 'Previous Work' },
     { id: 'settings', icon: <Settings size={20} />, label: 'Setting' },
-    { id: 'logout', icon: <LogOut size={20} />, label: 'Logout' }
+    { id: 'logout', icon: <LogOut size={20} />, label: 'Logout', action: logout }
   ];
 
+  if (!userData) {
+    return <div>Loading...</div>; // Show a loading state while fetching data
+  }
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric'
+    });
+  };
+
+  // Dynamically setting the data
   const basicInfo = [
-    { label: 'Hire Date', value: 'August 15, 2023' },
-    { label: 'Employee ID', value: 'EMP123456' },
-    { label: 'Name', value: 'Mansi Maruti Borle' }
+    { label: 'Hire Date', value: userData?.hireDate || 'N/A' }, // Example field
+    { label: 'Employee ID', value: userData.username || 'N/A' }, // Example field
+    { label: 'Name', value: userData?.Name },
+    { label: 'Email', value: userData?.email }
   ];
 
   const personalInfo = [
-    { label: 'Birth Date', value: 'January 15, 1990' },
-    { label: 'Address', value: '123 Tech Street, Digital City' },
-    { label: 'Email', value: 'user@example.com' },
-    { label: 'Phone', value: '+1 234 567 8900' }
+    { label: 'Birth Date', value: formatDate(userData?.DOB) || 'N/A' }, // Example field
+    { label: 'Address', value: userData?.Address || 'N/A' }, // Example field
+    { label: 'Phone', value: userData?.Phone_No || 'N/A' }, // Example field
+    { label: 'Aadhar ', value: userData?.Adhaar_No || 'N/A' } // Example field
   ];
 
   return (
     <div className="profile-page">
       {/* Mobile Menu Button */}
-      <button 
+      <button
         className="mobile-menu-btn"
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
       >
@@ -143,14 +175,18 @@ const ProfileSection = () => {
           <div className="logo-icon" />
           <span className="logo-text">GemHire</span>
         </div>
-        
+
         <nav className="nav-menu">
           {navItems.map((item) => (
             <button
               key={item.id}
               className={`nav-item ${activeNav === item.id ? 'active' : ''}`}
               onClick={() => {
-                setActiveNav(item.id);
+                if (item.id === 'logout') {
+                  item.action();
+                } else {
+                  setActiveNav(item.id);
+                }
                 setIsSidebarOpen(false);
               }}
             >
@@ -163,7 +199,7 @@ const ProfileSection = () => {
 
       {/* Overlay for mobile */}
       {isSidebarOpen && (
-        <div 
+        <div
           className="sidebar-overlay"
           onClick={() => setIsSidebarOpen(false)}
         />
@@ -197,12 +233,8 @@ const ProfileSection = () => {
 
           {/* Right Sidebar */}
           <aside className="right-sidebar">
-            <div className="news-card">
-              <h3 className="section-title">News</h3>
-              <div className="news-placeholder" />
-            </div>
-
-            <Calendar 
+            <NewsCard />
+            <Calendar
               selectedDate={selectedDate}
               onChange={setSelectedDate}
             />
