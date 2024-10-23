@@ -4,6 +4,7 @@ import useLogout from '../hooks/useLogout';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import NewsCard from './NewsCard';
 import { toast } from 'react-toastify';
+import PopForm from './employee-detail';
 import {
   User,
   Search,
@@ -111,7 +112,6 @@ const ProfileSection = () => {
 
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
-  const navigate = useNavigate();
   const logout = useLogout();
 
   useEffect(() => {
@@ -253,6 +253,7 @@ const ProfileSection = () => {
           </aside>
         </div>
       </main>
+      <PopForm />
     </div>
   );
 };
