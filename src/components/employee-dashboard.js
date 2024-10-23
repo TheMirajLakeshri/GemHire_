@@ -111,7 +111,6 @@ const ProfileSection = () => {
 
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
-  const navigate = useNavigate();
   const logout = useLogout();
 
   useEffect(() => {
