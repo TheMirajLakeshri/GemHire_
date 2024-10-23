@@ -108,6 +108,8 @@ const ProfileSection = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeNav, setActiveNav] = useState('profile');
   const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
   const logout = useLogout();
@@ -122,7 +124,6 @@ const ProfileSection = () => {
       navigate("/");
     }
   }, []);
-
   const navItems = [
     { id: 'profile', icon: <User size={20} />, label: 'Profile' },
     { id: 'findJob', icon: <Search size={20} />, label: 'Find Job' },
@@ -188,6 +189,17 @@ const ProfileSection = () => {
                   setActiveNav(item.id);
                 }
                 setIsSidebarOpen(false);
+
+                // Redirect to Find Job page if 'findJob' is clicked
+                if (item.id === 'findJob') {
+                  navigate('/JobProfile'); // Redirect to /find-job or another route you want
+                }
+                else if (item.id === 'previousWork') {
+                  navigate('/PreWork'); // Redirect to /find-job or another route you want
+                }
+                else if (item.id === 'settings') {
+                  navigate('/Settings'); // Redirect to /find-job or another route you want
+                }
               }}
             >
               {item.icon}

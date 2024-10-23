@@ -7,6 +7,9 @@ import AboutUsPage from './components/AboutUsPage';
 import NewsPage from './components/News';
 import Navbar from './components/Navbar';
 import Employeedashboard from './components/employee-dashboard';
+import JobProfile from './components/JobProfile';
+import PreWork from './components/PreWork';
+import Settings from './components/Settings';
 
 function App() {
   return (
@@ -17,8 +20,8 @@ function App() {
 }
 
 function AppContent() {
-  const currentLocation = useLocation();  // Correctly use useLocation inside AppContent
-  const showNavbar = currentLocation.pathname !== '/employee-dashboard';  // Check if path is NOT '/employee-dashboard'
+  const currentLocation = useLocation();  
+  const showNavbar = !['/employee-dashboard', '/JobProfile','/PreWork','/Settings'].includes(currentLocation.pathname);  // Exclude both paths
 
   return (
     <>
@@ -42,6 +45,9 @@ function AppContent() {
         <Route path="/news" element={<NewsPage />} />
         <Route path="/signup" element={<LandingPage />} />
         <Route path="/employee-dashboard" element={<Employeedashboard />} />
+        <Route path="/JobProfile" element={<JobProfile />} />
+        <Route path="/PreWork" element={<PreWork />} />
+        <Route path="/Settings" element={<Settings />} />
       </Routes>
     </>
   );
