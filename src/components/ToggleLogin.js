@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import pb from "../lib/pocketbase";
 import { toast } from 'react-toastify';
+import useRedirectIfLoggedIn from "../hooks/useRedirectIfLoggedIn";
 import "./ToggleLogin.css";
 
 const handleCompanyGoogleLogin = async (navigate) => {
@@ -10,6 +11,7 @@ const handleCompanyGoogleLogin = async (navigate) => {
       provider: 'google',
       redirectUrl: 'http://127.0.0.1:8090/api/oauth2-redirect',
     });
+    toast.success("login success !");
     navigate("/company-dashboard");
   } catch (error) {
     toast.error("Google Login failed! Please try again.");
@@ -23,6 +25,7 @@ const handleEmployeeGoogleLogin = async (navigate) => {
       provider: 'google',
       redirectUrl: 'http://127.0.0.1:8090/api/oauth2-redirect',
     });
+    toast.success("login success !");
     navigate("/employee-dashboard");
   } catch (error) {
     toast.error("Google Login failed! Please try again.");
@@ -37,6 +40,7 @@ const handleCompanyPasswordLogin = async (event, navigate) => {
 
   try {
     await pb.collection('company').authWithPassword(companyID, companyPass);
+    toast.success("login success !");
     navigate("/company-dashboard");
   } catch (error) {
     toast.error("Login failed! Please try again.");
@@ -51,6 +55,7 @@ const handleEmployeePasswordLogin = async (event, navigate) => {
 
   try {
     await pb.collection('employee').authWithPassword(empID, empPass);
+    toast.success("login success !");
     navigate("/employee-dashboard");
   } catch (error) {
     toast.error("Login failed! Please try again.");
@@ -59,6 +64,7 @@ const handleEmployeePasswordLogin = async (event, navigate) => {
 };
 
 const LoginTabs = () => {
+  useRedirectIfLoggedIn();
   const [activeTab, setActiveTab] = useState("company");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userType, setUserType] = useState(""); // For distinguishing between company and employee
