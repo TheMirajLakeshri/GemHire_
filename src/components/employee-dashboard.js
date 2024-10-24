@@ -108,7 +108,6 @@ const ProfileSection = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeNav, setActiveNav] = useState('profile');
   const [selectedDate, setSelectedDate] = useState(new Date());
-
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
   const logout = useLogout();
@@ -146,17 +145,17 @@ const ProfileSection = () => {
 
   // Dynamically setting the data
   const basicInfo = [
-    { label: 'Hire Date', value: userData?.hireDate || 'N/A' }, // Example field
-    { label: 'Employee ID', value: userData.username || 'N/A' }, // Example field
+    { label: 'Hire Date', value: userData?.hireDate || 'N/A' },
+    { label: 'Employee ID', value: userData.username || 'N/A' },
     { label: 'Name', value: userData?.Name },
     { label: 'Email', value: userData?.email }
   ];
 
   const personalInfo = [
-    { label: 'Birth Date', value: formatDate(userData?.DOB) || 'N/A' }, // Example field
-    { label: 'Address', value: userData?.Address || 'N/A' }, // Example field
-    { label: 'Phone', value: userData?.Phone_No || 'N/A' }, // Example field
-    { label: 'Aadhar ', value: userData?.Adhaar_No || 'N/A' } // Example field
+    { label: 'Birth Date', value: formatDate(userData?.DOB) || 'N/A' }, 
+    { label: 'Address', value: userData?.Address || 'N/A' },
+    { label: 'Phone', value: userData?.Phone_No || 'N/A' },
+    { label: 'Aadhar ', value: userData?.Adhaar_No || 'N/A' }
   ];
 
   return (

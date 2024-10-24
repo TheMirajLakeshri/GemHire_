@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useLogout from '../hooks/useLogout';
 import { 
   User, 
   Search, 
@@ -16,6 +17,7 @@ const ProfileSection = () => {
   // Set 'findJob' as the default active nav item
   const [activeNav, setActiveNav] = useState('findJob');
   const navigate = useNavigate();
+  const logout = useLogout();
 
   const jobListings = [
     {
@@ -57,7 +59,7 @@ const ProfileSection = () => {
     { id: 'findJob', icon: <Search size={20} />, label: 'Find Job' },
     { id: 'previousWork', icon: <Briefcase size={20} />, label: 'Previous Work' },
     { id: 'settings', icon: <Settings size={20} />, label: 'Setting' },
-    { id: 'logout', icon: <LogOut size={20} />, label: 'Logout' }
+    { id: 'logout', icon: <LogOut size={20} />, label: 'Logout' , action: logout}
   ];
 
   return (
@@ -96,7 +98,7 @@ const ProfileSection = () => {
                 }
                 else if(item.id==='logout')
                 {
-                  
+                  item.action();
                 }
               }}
             >

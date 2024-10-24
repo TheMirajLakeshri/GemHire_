@@ -50,46 +50,47 @@
 /* For Medium to Large Screens */
 @media (max-width: 768px) {
   .navbar-menu {
-      display: none; /* Hide the menu by default on small screens */
-      flex-direction: column; /* Stack menu items vertically */
-      position: absolute; /* Position it absolutely */
-      top: 60px; /* Position it below the navbar */
-      right: 0; /* Align to the right */
-      background-color: #004b8d; /* Match background color */
-      width: 100%; /* Full width */
-      z-index: 1; /* Make sure it is on top */
-      padding: 1rem 0; /* Add padding */
-  }
-
-  /* Show the menu when the toggle is active */
-  .navbar-menu.active {
-      display: flex; /* Display the menu */
-  }
-
-  /* Add styles for the toggle button */
-  .navbar-toggle {
-      display: flex; /* Show toggle button */
+      display: none;
       flex-direction: column;
-      cursor: pointer; /* Change cursor on hover */
-      gap: 4px; /* Space between lines */
+      position: absolute; 
+      top: 60px;
+      right: 0; 
+      background-color: #004b8d;
+      width: 100%;
+      z-index: 1; 
+      padding: 1rem 0;
   }
 
-  /* Lines in toggle button */
+  .navbar-menu.active {
+      display: flex; 
+      z-index: 3;
+  }
+
+  .navbar-toggle {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer; 
+      gap: 4px;
+  }
+
   .navbar-toggle div {
-      width: 25px; /* Width of the lines */
-      height: 3px; /* Height of the lines */
-      background-color: white; /* Line color */
-      transition: all 0.3s ease; /* Transition for animation */
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      transition: all 0.3s ease; 
+  }
+  .navbar-menu  li {
+    margin: 10px 20px;
   }
 }
 
 /* For Smaller Screens */
 @media (max-width: 480px) {
   .navbar {
-      padding: 1rem; /* Reduce padding for smaller screens */
+      padding: 1rem;
   }
 
   .navbar-logo {
-      font-size: 1.2rem; /* Adjust logo size */
+      font-size: 1.2rem; 
   }
 }

@@ -47,3 +47,49 @@
   border-radius: 5px;
   margin-top: 10px;
 }
+.predictions-section {
+  margin-bottom: 40px;
+}
+.text-center {
+  text-align: center;
+}
+/* Ensure the carousel takes up full width and doesn't overflow */
+.prediction-card {
+  width: 85%!important; 
+  height: 120px;
+  padding: 20px;
+  margin: auto;
+  text-align: center;
+  background-color: #004b8d;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex!important;
+  align-items: center;
+}
+.prediction-content {
+  font-size: 1.2rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: #004b8d; /* Change the color of the arrows */
+}
+
+
+/* Carousel container to ensure proper alignment and prevent overlap */
+.slick-slide {
+  display: flex !important;
+  justify-content: center;
+}
+.slick-slide div {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.slick-list {
+  overflow: hidden; /* Prevent any overflow issues */
+}

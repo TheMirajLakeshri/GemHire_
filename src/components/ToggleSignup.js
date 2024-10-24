@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import pb from "../lib/pocketbase";
 import { toast } from 'react-toastify';
+import useRedirectIfLoggedIn from "../hooks/useRedirectIfLoggedIn";
 import "./ToggleLogin.css";
 
 const handleCompanyGoogleSignup = async (navigate) => {
@@ -69,6 +70,7 @@ const handleEmployeePasswordSignup = async (event, navigate) => {
 };
 
 const SignupTabs = () => {
+  useRedirectIfLoggedIn();
   const [activeTab, setActiveTab] = useState("company");
   const navigate = useNavigate();
 
