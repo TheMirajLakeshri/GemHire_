@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { User, Search, Briefcase, Settings, Menu, X, LogOut } from 'lucide-react';
+import useLogout from '../hooks/useLogout';
 import './PreWork.css';
 
 const ProfileSection = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeNav, setActiveNav] = useState('previousWork');
   const navigate = useNavigate();
+  const logout = useLogout();
   
   const navItems = [
     { id: 'profile', icon: <User size={20} />, label: 'Profile', route: '/employee-dashboard' },
     { id: 'findJob', icon: <Search size={20} />, label: 'Find Job', route: '/JobProfile' },
     { id: 'previousWork', icon: <Briefcase size={20} />, label: 'Previous Work' },
     { id: 'settings', icon: <Settings size={20} />, label: 'Setting', route: '/Settings' },
-    { id: 'logout', icon: <LogOut size={20} />, label: 'Logout' }
+    { id: 'logout', icon: <LogOut size={20} />, label: 'Logout',action: logout }
   ];
 
   const handleNavigation = (id, route) => {
@@ -43,17 +45,17 @@ const ProfileSection = () => {
                 setActiveNav(item.id);
                 setIsSidebarOpen(false);
                 if (item.id === 'profile') {
-                  navigate('/employee-dashboard'); // Redirect to /find-job or another route you want
+                  navigate('/employee-dashboard');
                 }
                 else if (item.id === 'findJob') {
-                  navigate('/JobProfile'); // Redirect to /find-job or another route you want
+                  navigate('/JobProfile');
                 }
                 else if (item.id === 'settings') {
-                  navigate('/Settings'); // Redirect to /find-job or another route you want
+                  navigate('/Settings');
                 }
                 else if(item.id==='logout')
                 {
-                  
+                  item.action();
                 }
               }}
             >
