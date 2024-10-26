@@ -132,7 +132,7 @@ const ProfileSection = () => {
   ];
 
   if (!userData) {
-    return <div>Loading...</div>; // Show a loading state while fetching data
+    return <div>Loading...</div>;
   }
 
   const formatDate = (dateString) => {

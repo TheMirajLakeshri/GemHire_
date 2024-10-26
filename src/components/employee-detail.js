@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import pb from "../lib/pocketbase";
+import { toast } from 'react-toastify';
 import { X } from 'lucide-react';
 import './employee-detail.css';
 

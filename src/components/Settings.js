@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useLogout from '../hooks/useLogout';
 import { 
   User, 
   Search, 
@@ -94,13 +95,14 @@ const ProfileSection = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeNav, setActiveNav] = useState('settings');
   const navigate = useNavigate();
+  const logout = useLogout();
 
   const navItems = [
     { id: 'profile', icon: <User size={20} />, label: 'Profile' },
     { id: 'findJob', icon: <Search size={20} />, label: 'Find Job' },
     { id: 'previousWork', icon: <Briefcase size={20} />, label: 'Previous Work' },
     { id: 'settings', icon: <Settings size={20} />, label: 'Settings' },
-    { id: 'logout', icon: <LogOut size={20} />, label: 'Logout' }
+    { id: 'logout', icon: <LogOut size={20} />, label: 'Logout', action: logout }
   ];
 
   return (
@@ -137,7 +139,7 @@ const ProfileSection = () => {
                 } else if (item.id === 'settings') {
                   navigate('/settings');
                 } else if (item.id === 'logout') {
-                  // Handle logout functionality
+                  item.action();
                 }
               }}
             >
