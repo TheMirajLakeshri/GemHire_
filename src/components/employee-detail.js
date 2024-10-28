@@ -6,22 +6,36 @@ import './employee-detail.css';
 
 const PopupForm = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phoneNumber: '',
-    department: '',
-    message: ''
-  });
+  const [formData, setFormData] = useState({});
+  const [emptyFields, setEmptyFields] = useState([]);
+  const [isProfileComplete, setIsProfileComplete] = useState(localStorage.getItem("isProfileComplete") === "true");
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 5000);
+    if (!isProfileComplete) {
+      fetchUserData();
+    }
+  }, [isProfileComplete]);
 
-    return () => clearTimeout(timer);
-  }, []);
+  const fetchUserData = async () => {
+    const currentUser = pb.authStore.model;
+
+    if (!currentUser) {
+      toast.error("User is not authenticated.");
+      return;
+    }
+
+    // Check for empty fields
+    const emptyFields = Object.keys(currentUser).filter(field => !currentUser[field]);
+    if (emptyFields.length > 0) {
+      setFormData(emptyFields.reduce((acc, field) => ({ ...acc, [field]: "" }), {}));
+      setEmptyFields(emptyFields);
+      setIsVisible(true);
+    } else {
+      // Set profile as complete if no empty fields are found
+      localStorage.setItem("isProfileComplete", "true");
+      setIsProfileComplete(true);
+    }
+  };
 
   const handleClose = () => {
     setIsVisible(false);
@@ -35,11 +49,24 @@ const PopupForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Add your form submission logic here
-    setIsVisible(false);
+
+    try {
+      const updatedData = emptyFields.reduce((acc, field) => ({
+        ...acc,
+        [field]: formData[field]
+      }), {});
+
+      await pb.collection('employee').update(pb.authStore.model.id, updatedData);
+      toast.success("Profile updated successfully!");
+      localStorage.setItem("isProfileComplete", "true");
+      setIsProfileComplete(true);
+      setIsVisible(false);
+    } catch (error) {
+      toast.error("Failed to update profile.");
+      console.error("Update error:", error);
+    }
   };
 
   if (!isVisible) return null;
@@ -53,88 +80,92 @@ const PopupForm = () => {
         
         <div className="popup-header">
           <h2>Update Your Information</h2>
-          <p>Please fill out the form below to update your profile</p>
+          <p>Please fill out the form below to complete your profile</p>
         </div>
 
         <form onSubmit={handleSubmit} className="popup-form">
-          <div className="form-row">
+          {emptyFields.includes("Name") && (
             <div className="form-group">
-              <label htmlFor="firstName">First Name</label>
+              <label htmlFor="Name">Name</label>
               <input
                 type="text"
-                id="firstName"
-                name="firstName"
-                value={formData.firstName}
+                id="Name"
+                name="Name"
+                value={formData.Name}
                 onChange={handleChange}
                 required
               />
             </div>
-
+          )}
+          {emptyFields.includes("DOB") && (
             <div className="form-group">
-              <label htmlFor="lastName">Last Name</label>
+              <label htmlFor="DOB">Date of Birth</label>
               <input
-                type="text"
-                id="lastName"
-                name="lastName"
-                value={formData.lastName}
+                type="date"
+                id="DOB"
+                name="DOB"
+                value={formData.DOB}
                 onChange={handleChange}
                 required
               />
             </div>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="email">Email Address</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="phoneNumber">Phone Number</label>
-            <input
-              type="tel"
-              id="phoneNumber"
-              name="phoneNumber"
-              value={formData.phoneNumber}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="department">Department</label>
-            <select
-              id="department"
-              name="department"
-              value={formData.department}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select Department</option>
-              <option value="hr">Human Resources</option>
-              <option value="it">Information Technology</option>
-              <option value="finance">Finance</option>
-              <option value="marketing">Marketing</option>
-              <option value="operations">Operations</option>
-            </select>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="message">Additional Information</label>
-            <textarea
-              id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              rows="3"
-            ></textarea>
-          </div>
+          )}
+          {emptyFields.includes("Phone_No") && (
+            <div className="form-group">
+              <label htmlFor="Phone_No">Phone Number</label>
+              <input
+                type="tel"
+                id="Phone_No"
+                name="Phone_No"
+                value={formData.Phone_No}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          )}
+          {emptyFields.includes("Address") && (
+            <div className="form-group">
+              <label htmlFor="Address">Address</label>
+              <input
+                type="text"
+                id="Address"
+                name="Address"
+                value={formData.Address}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          )}
+          {emptyFields.includes("Adhaar_No") && (
+            <div className="form-group">
+              <label htmlFor="Adhaar_No">Aadhaar Number</label>
+              <input
+                type="text"
+                id="Adhaar_No"
+                name="Adhaar_No"
+                value={formData.Adhaar_No}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          )}
+          {emptyFields.includes("Sex") && (
+            <div className="form-group">
+              <label htmlFor="Sex">Sex</label>
+              <select
+                id="Sex"
+                name="Sex"
+                value={formData.Sex}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          )}
 
           <div className="form-actions">
             <button type="button" className="cancel-button" onClick={handleClose}>
