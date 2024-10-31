@@ -11,6 +11,10 @@ import JobProfile from './components/JobProfile';
 import PreWork from './components/PreWork';
 import Settings from './components/Settings';
 import EmployeeDetails from './components/employee-detail';
+import CompanyDetails from './components/company-dashboard';
+import EmployeeAttendance from './components/employee-attendance';
+import CreateJobModal from './components/CreateJobModal';
+import JobsPage from './components/ListedJobs';
 
 function App() {
   return (
@@ -22,7 +26,7 @@ function App() {
 
 function AppContent() {
   const currentLocation = useLocation();  
-  const showNavbar = !['/employee-dashboard', '/JobProfile','/PreWork','/Settings','/employee-detail'].includes(currentLocation.pathname);  // Exclude both paths
+  const showNavbar = !['/employee-dashboard','/listed-jobs','/company-dashboard','/employee-attendance', '/JobProfile','/PreWork','/Settings','/employee-detail'].includes(currentLocation.pathname);  // Exclude both paths
 
   return (
     <>
@@ -50,7 +54,10 @@ function AppContent() {
         <Route path="/PreWork" element={<PreWork />} />
         <Route path="/Settings" element={<Settings />} />
         <Route path="/EmployeeDeatils" element={<EmployeeDetails />} />
-       
+        <Route path="/company-dashboard" element={<CompanyDetails />} />
+        <Route path="/employee-attendance" element={<EmployeeAttendance />} />
+        <Route path="/create-job" element={<CreateJobModal />} />
+        <Route path="/listed-jobs" element={<JobsPage />} />
       </Routes>
     </>
   );

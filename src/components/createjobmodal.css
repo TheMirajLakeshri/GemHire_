@@ -1,0 +1,155 @@
+/* src/components/createjobmodal.css */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Dim background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.job-modal-content {
+  margin: 0 auto;
+  position: relative;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 35%; /* Responsive width */
+  max-height: 90%; /* Limit height */
+  height: auto; /* Allow automatic height adjustment */
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  overflow-y: auto; /* Enable scrolling if content overflows */
+}
+
+.job-modal-content::-webkit-scrollbar {
+  width: 5px; /* Width of the scrollbar */
+}
+
+.job-modal-content::-webkit-scrollbar-thumb {
+  background-color: rgb(17, 51, 119); /* Custom color for scrollbar thumb */
+  border-radius: 2px;
+}
+
+.job-modal-content::-webkit-scrollbar-track {
+  background: rgb(186, 201, 231); /* Custom color for scrollbar track */
+}
+
+.job-modal-content h2 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.job-modal-content form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.job-modal-content label {
+  margin-bottom: 10px;
+}
+
+.job-modal-content input,
+.job-modal-content textarea {
+  width: calc(100% - 8px);
+  padding: 10px; /* Maintain consistent padding */
+  margin-bottom: 15px; /* Adjust margin */
+  border: 1px solid #ddd; /* Lighter border */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 14px; /* Adjust font size */
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  margin-top:5px;
+}
+
+.job-modal-content textarea {
+  height: 50px; /* Set a fixed height */
+  resize: none;  /* Disable resizing by the user */
+}
+
+.job-modal-content textarea::-webkit-scrollbar{
+  width: 3px;
+}
+
+.job-modal-content input:focus,
+.job-modal-content textarea:focus {
+  border-color: #dab943;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Add shadow on focus */
+}
+
+.job-modal-content-button {
+  width: 100%; /* Full width */
+  padding: 10px 13px; /* Adjust padding */
+  border: none;
+  border-radius: 12px; /* Rounded corners */
+  background-color: #86857d;
+  box-shadow: 3px 5px 10px rgba(111, 111, 111, 0.4);
+  color: white;
+  font-size: 16px; /* Adjust font size */
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 5px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.job-modal-content-button:hover {
+  background-color: rgb(17, 51, 119);
+  transform: translateY(-2px);
+}
+
+.job-modal-content .close-button {
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  border: none;
+  border-radius: 6px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+  font-weight: bold;
+  background-color: white;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.close-button:hover {
+  background-color: rgb(17, 51, 119); /* Color on hover */
+  color:aliceblue;
+}
+
+.time-attendance {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Add some space between elements */
+}
+
+.time-attendance label {
+  margin-right: 5px;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 600px) {
+  .job-modal-content {
+    width: 95%; /* Take a bit more width on small screens */
+    height: auto; /* Allow for natural height adjustment */
+    max-height: 90%; /* Ensure it doesn't exceed viewport height */
+  }
+
+  .job-modal-content h2 {
+    font-size: 20px; /* Smaller heading on small screens */
+  }
+
+  .job-modal-content-button {
+    font-size: 14px; /* Smaller button font */
+  }
+
+  .job-modal-content input,
+  .job-modal-content textarea {
+    font-size: 12px; /* Smaller input font */
+  }
+}

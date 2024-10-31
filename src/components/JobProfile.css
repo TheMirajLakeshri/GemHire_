@@ -129,24 +129,17 @@
   padding: 20px;
 }
 
-/* Job Card Styles */
-.job-card {
-  border: 1px solid rgba(0, 75, 141, 0.1);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  background-color: #ffffff;
-  position: relative;
+.job-card-j::-webkit-scrollbar{
+  width: 4px;
 }
 
-.job-card:hover {
-  transform: translateY(-8px);
+.job-card-j:hover {
+  transform: translateY(-4px);
   box-shadow: 0 15px 30px rgba(0, 75, 141, 0.1);
   border-color: #004b8d;
 }
 
-.job-card::before {
+.job-card-j::before {
   content: '';
   position: absolute;
   top: 0;
@@ -158,36 +151,115 @@
   transition: opacity 0.3s ease;
 }
 
-.job-card:hover::before {
-  opacity: 1;
+.job-card-j:hover::before {
+  opacity: 0;
 }
 
-.job-card-image {
+.job-card-j-image {
   position: relative;
   overflow: hidden;
 }
 
-.job-card-image img {
+.job-card-j-image img {
   width: 100%;
-  height: 200px;
+  height: 180px;
   object-fit: cover;
   transition: transform 0.5s ease;
 }
 
-.job-card:hover .job-card-image img {
+.job-card-j:hover .job-card-j-image img {
   transform: scale(1.05);
 }
 
-.job-card-content {
+.job-card-j:hover .job-card-j-content {
+  transform: translateY(0); /* Slide in the content */
+  opacity: 1; /* Show the content */
+}
+
+/* Hide image and company name on hover */
+.job-card-j:hover .job-card-j-image img {
+  opacity: 0; /* Hide the image */
+}
+
+.job-card-j:hover .company-name {
+  opacity: 0; /* Hide the company name */
+}
+
+
+.job-card-j-content {
   padding: 24px;
+}
+
+/* Job Card Styles */
+.job-card-j {
+  border: 1px solid rgba(0, 75, 141, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: #ffffff;
+  position: relative;
+  max-height: 400px; /* Adjust height as needed */
+  height: 300px; /* Fixed height */
+  overflow: hidden; /* Ensure child elements do not overflow */
+}
+
+/* Container for job details and apply button */
+.job-details-container {
+  position: absolute;
+  bottom: 0; /* Position at the bottom of the card */
+  left: 0;
+  right: 0;
+  height: 100%; /* Full height */
+  background-color: rgba(255, 255, 255, 0.9); /* Background for overlay */
+  transform: translateY(100%); /* Start hidden (below the card) */
+  transition: transform 0.3s ease; /* Transition effect */
+}
+
+/* Show details on hover */
+.job-card-j:hover .job-details-container {
+  transform: translateY(0); /* Slide in from the bottom */
+}
+
+/* Adjust padding and visibility of details */
+.job-card-j-content {
+  padding: 24px;
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.3s ease; /* Transition effect for opacity */
+}
+
+/* Show content on hover */
+.job-card-j:hover .job-card-j-content {
+  opacity: 30; /* Fade in on hover */
+}
+
+/* Apply button styles can remain as is */
+.apply-button {
+  width: 100%;
+  padding: 14px;
+  background-color: #004b8d;
+  color: white;
+  text-align: center;
+  border: none;
+  border-radius: 10px;
+  margin-top: 20px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .company-name {
   font-size: 22px;
   font-weight: 700;
-  color: #004b8d;
+  color: #07457c;
+  margin-top: 15px;
+  margin-left: 10px;
   margin-bottom: 12px;
   line-height: 1.3;
+  text-align: center;
 }
 
 .job-badge {
@@ -210,7 +282,6 @@
   align-items: center;
   gap: 8px;
   margin: 8px 0;
-  color: #4a5568;
   font-size: 14px;
   line-height: 1.6;
 }
@@ -295,7 +366,7 @@
       margin-left: 0;
   }
 
-  .job-card-content {
+  .job-card-j-content {
       padding: 20px;
   }
 

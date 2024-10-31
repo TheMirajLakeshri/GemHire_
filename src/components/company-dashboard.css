@@ -1,0 +1,239 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  
+}
+
+body {
+  background-color: #eef7f9;
+  color: #333;
+}
+
+.Company{
+  display: flex;
+  gap: 20px;
+  justify-content:flex-start;
+}
+
+/* Dashboard Container */
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  min-width: 79%;
+}
+
+/* Header Section */
+.dashboard-header {
+  width: 100%;
+  max-width: 100%;
+  background: linear-gradient(90deg, rgb(17, 51, 119), rgb(105, 131, 184));
+  padding: 30px;
+  text-align: center;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  padding-right: 15px;
+}
+
+.dashboard-header h1 {
+  font-size: 2rem;
+  color: #fff;
+}
+
+.dashboard-header p {
+  color: #fff;
+  font-size: 1.1rem;
+  margin: 10px 0;
+}
+
+.create-work-btn {
+  background-color: #ffc107;
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.create-work-btn:hover {
+  background-color: #ffb300;
+}
+
+/* Stats Cards Section */
+.stats-cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Individual Stat Card */
+.stats-card {
+  flex: 1;
+  min-width: 150px;
+  background-color: white;;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stats-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stats-title {
+  font-size: 0.9rem;
+  color: rgb(80, 81, 84);
+}
+
+.stats-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.stats-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: rgb(17, 51, 119);
+}
+
+.stats-icon {
+  font-size: 1.5rem;
+  color: #666;
+}
+
+/* Employees Section */
+.employees-section {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 20px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.employee-list::-webkit-scrollbar {
+  width: 5px; /* Width of the scrollbar */
+}
+
+.employee-list::-webkit-scrollbar-thumb {
+  background-color: rgb(17, 51, 119); /* Custom color for scrollbar thumb */
+  border-radius: 2px;
+}
+
+.employee-list::-webkit-scrollbar-track {
+  background: rgb(186, 201, 231); /* Custom color for scrollbar track */
+}
+
+.employees-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.employees-header h2 {
+  font-size: 1.2rem;
+  color: rgb(17, 51, 119);
+}
+
+.dropdown {
+  display: flex;
+  align-items: center;
+  background-color: rgb(186, 201, 231);
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+  z-index: 1000;
+  width:100%;
+}
+
+.dropdown-menu div {
+  padding: 10px 15px;
+  cursor: pointer;
+  color: #333;
+}
+
+.dropdown-menu div:hover {
+  background-color: #f0f0f0;
+}
+
+
+.employee-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  max-height: 300px; /* Adjust height to show approximately 6 employees */
+  overflow-y: auto;
+}
+
+.employee-card {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.employee-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 30%;
+  object-fit: cover;
+}
+
+.employee-details {
+  flex: 1;
+}
+
+.employee-name {
+  font-weight: bold;
+  color: #333;
+}
+
+.employee-role {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.employee-date {
+  font-size: 0.85rem;
+  color: #999;
+}
+
+

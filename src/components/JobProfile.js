@@ -94,7 +94,7 @@ const ProfileSection = () => {
                   navigate('/PreWork'); // Redirect to /find-job or another route you want
                 }
                 else if (item.id === 'settings') {
-                  navigate('/Settings'); // Redirect to /find-job or another route you want
+                  navigate('/'); // Redirect to /find-job or another route you want
                 }
                 else if(item.id==='logout')
                 {
@@ -122,16 +122,19 @@ const ProfileSection = () => {
        <div className="title"> <h2>Find Jobs</h2></div>
         <div className="job-grid">
           {jobListings.map((job, index) => (
-            <div key={index} className="job-card">
-              <div className="job-card-image">
-                <img 
-                  src="/images/findjob.jpg" // Replace with actual image path
-                  alt="Job"
-                />
-              </div>
-              
-              <div className="job-card-content">
-                <h3 className="company-name">{job.company}</h3>
+            <div key={index} className="job-card-j">
+            <div className="job-card-j-image">
+              <img 
+                src="/images/findjob.jpg" // Replace with actual image path
+                alt="Job"
+              />
+            </div>
+            
+            <h3 className="company-name">{job.company}</h3>
+            
+            {/* New container for job details and apply button */}
+            <div className="job-details-container">
+              <div className="job-card-j-content">
                 <div className="job-details">
                   <p className="requirements">Requirement: {job.requirements}</p>
                   <p>Address: {job.location}</p>
@@ -144,6 +147,8 @@ const ProfileSection = () => {
                 </button>
               </div>
             </div>
+          </div>
+          
           ))}
         </div>
       </main>
